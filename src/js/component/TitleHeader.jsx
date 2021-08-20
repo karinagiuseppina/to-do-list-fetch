@@ -3,7 +3,13 @@ import PropTypes from "prop-types";
 
 //create your first component
 const TitleHeader = props => {
-	return <h1 className="text-center mt-5">{props.title}</h1>;
+	return (
+		<div className="row">
+			<div className="col">
+				<h1 className="text-center mt-5 pink-color">{props.title}</h1>
+			</div>
+		</div>
+	);
 };
 
 TitleHeader.propTypes = {

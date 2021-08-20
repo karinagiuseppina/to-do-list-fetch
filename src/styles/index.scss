@@ -11,12 +11,26 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
-
+body {
+    background: #f1eeee;
+}
 li i{
     opacity: 0;
     font-style: normal;
+    color: #9e7a7e;
 }
 
 li:hover i{
     opacity: 1;
+}
+
+.pink-color{
+    color: #9e7a7e;
+}
+
+.gray-color{
+    color: #818181;
+}
+.items{
+    font-size: 10px;
 }
