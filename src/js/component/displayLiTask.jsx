@@ -5,6 +5,7 @@ const displayLiTask = ({ task, position, handleDeleteItem }) => {
 	const deleteTask = () => {
 		handleDeleteItem(position);
 	};
+
 	return (
 		<li
 			key={position}

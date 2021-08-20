@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-const inputNewItem = ({ handleAddItem }) => {
-	const [inputValue, setInputValue] = React.useState("");
-
+const inputNewItem = ({ inputValue, setInputValue, handleAddItem }) => {
 	const onClick = () => {
 		handleAddItem({ inputValue });
 		setInputValue("");
 	};
 
 	const addTask = event => {
-		if (event.key === "Enter") {
+		if (event.key.toLowerCase() === "enter") {
 			if (inputValue === "") {
 				alert("¡Lo sentimos! No puedes añadir tareas vacías.");
 			} else {
@@ -42,6 +40,8 @@ const inputNewItem = ({ handleAddItem }) => {
 };
 
 inputNewItem.propTypes = {
+	inputValue: PropTypes.string,
+	setInputValue: PropTypes.func,
 	handleAddItem: PropTypes.func
 };
 

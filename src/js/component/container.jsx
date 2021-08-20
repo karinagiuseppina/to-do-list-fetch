@@ -6,10 +6,13 @@ import TaskList from "./taskList.jsx";
 
 const Container = () => {
 	const [list, setList] = useState([]);
+	const [inputValue, setInputValue] = React.useState("");
 
 	const handleAddItem = newItem => {
 		const duplicatedElement = list.findIndex(
-			item => item.inputValue === newItem.inputValue
+			item =>
+				item.inputValue.toLowerCase() ===
+				newItem.inputValue.toLowerCase()
 		);
 
 		if (duplicatedElement === -1) {
@@ -19,17 +22,20 @@ const Container = () => {
 		}
 	};
 
-	const handleDeleteItem = position => {
+	const handleDeleteItem = pos => {
 		const temp = [...list];
-		temp.splice(position, 1);
-		//const updateList = list.filter(item => !(item === list[position]));
+		temp.splice(pos, 1);
 		setList(temp);
 	};
 
 	return (
 		<div className="container-fluid">
 			<TitleHeader title="To dos" />
-			<InputNewItem handleAddItem={handleAddItem} />
+			<InputNewItem
+				handleAddItem={handleAddItem}
+				inputValue={inputValue}
+				setInputValue={setInputValue}
+			/>
 			<TaskList list={list} handleDeleteItem={handleDeleteItem} />
 		</div>
 	);
