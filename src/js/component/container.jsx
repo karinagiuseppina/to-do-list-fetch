@@ -9,10 +9,9 @@ const Container = () => {
 
 	const handleAddItem = addItem => {
 		setList([...list, addItem]);
-		console.log(list);
 	};
 	return (
-		<div>
+		<div className="container-fluid">
 			<TitleHeader title="To dos" />
 			<InputNewItem handleAddItem={handleAddItem} />
 			<TaskList list={list} />

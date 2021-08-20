@@ -11,3 +11,12 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+
+li i{
+    opacity: 0;
+    font-style: normal;
+}
+
+li:hover i{
+    opacity: 1;
+}

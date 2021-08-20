@@ -2,25 +2,31 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const TaskList = prop => {
-	const tasks = prop.tasks;
+	const list = prop.list;
 
-	const taskinHTML = tasks.map((task, index) => (
-		<button
-			type="button"
-			key={index}
-			className="list-group-item list-group-item-action">
-			{task}
-		</button>
-	));
+	let taskinHTML = <li className="list-group-item">No tasks, add a task</li>;
+	if (list.length) {
+		taskinHTML = list.map((task, index) => (
+			<li
+				className="list-group-item d-flex justify-content-between"
+				key={index}>
+				<span>{task.inputValue}</span>
+				<i>x</i>
+			</li>
+		));
+	}
+
 	return (
-		<div className="list-group">
-			{tasks.length ? { taskinHTML } : "No tasks"}
+		<div className="row">
+			<div className="col-6 mx-auto">
+				<ul className="list-group">{taskinHTML}</ul>
+			</div>
 		</div>
 	);
 };
 
 TaskList.propTypes = {
-	tasks: PropTypes.array
+	list: PropTypes.array
 };
 
 export default TaskList;

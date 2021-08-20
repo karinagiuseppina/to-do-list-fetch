@@ -5,24 +5,27 @@ const inputNewItem = ({ handleAddItem }) => {
 	const [inputValue, setInputValue] = React.useState("");
 
 	const onClick = () => {
-		handleAddItem({
-			done: false,
-			inputValue
-		});
+		handleAddItem({ inputValue });
 
 		setInputValue("");
 	};
 
 	return (
-		<div>
-			<input
-				type="text"
-				onChange={e => setInputValue(e.target.value)}
-				value={inputValue}
-			/>
-			<button onClick={onClick} disabled={inputValue ? "" : "disabled"}>
-				+
-			</button>
+		<div className="row">
+			<div className="col-6 mx-auto d-flex justify-content-stretch">
+				<input
+					className="flex-grow-1 p-2"
+					type="text"
+					onChange={e => setInputValue(e.target.value)}
+					value={inputValue}
+				/>
+				<button
+					className="p-2"
+					onClick={onClick}
+					disabled={inputValue ? "" : "disabled"}>
+					+
+				</button>
+			</div>
 		</div>
 	);
 };
