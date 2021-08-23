@@ -28,6 +28,42 @@ const Container = () => {
 		setList(temp);
 	};
 
+	function createNewUser(user) {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/" + user, {
+			method: "POST",
+			mode: "cors",
+			redirect: "follow",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify([])
+		});
+	}
+
+	async function loadTasks() {
+		fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/karinagiuseppina"
+		)
+			.then(function(response) {
+				if (!response.ok) {
+					throw Error(response.statusText);
+				}
+				// Read the response as json.
+				return response.json();
+			})
+			.then(function(responseAsJson) {
+				// Do stuff with the JSON
+				console.log(responseAsJson);
+			})
+			.catch(function(error) {
+				console.log("Looks like there was a problem: \n", error);
+			});
+	}
+
+	useEffect(() => {
+		loadTasks();
+	}, []);
+
 	return (
 		<div className="container-fluid">
 			<TitleHeader title="To dos" />
