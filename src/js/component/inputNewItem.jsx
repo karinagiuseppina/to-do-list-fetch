@@ -2,17 +2,12 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 const inputNewItem = ({ inputValue, setInputValue, handleAddItem }) => {
-	const onClick = () => {
-		handleAddItem({ inputValue });
-		setInputValue("");
-	};
-
 	const addTask = event => {
 		if (event.key.toLowerCase() === "enter") {
 			if (inputValue === "") {
 				alert("¡Lo sentimos! No puedes añadir tareas vacías.");
 			} else {
-				handleAddItem({ inputValue });
+				handleAddItem({ label: inputValue, done: false });
 				setInputValue("");
 			}
 		}
@@ -28,12 +23,6 @@ const inputNewItem = ({ inputValue, setInputValue, handleAddItem }) => {
 					onKeyDown={addTask}
 					value={inputValue}
 				/>
-				<button
-					className="p-2 border border-white border-2 pink-color"
-					onClick={onClick}
-					disabled={inputValue ? "" : "disabled"}>
-					+
-				</button>
 			</div>
 		</div>
 	);

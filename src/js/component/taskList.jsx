@@ -12,7 +12,7 @@ const TaskList = ({ list, handleDeleteItem }) => {
 		taskinHTML = list.map((task, index) => (
 			<DisplayLiTask
 				key={index}
-				task={task.inputValue}
+				task={task.label}
 				position={index}
 				handleDeleteItem={handleDeleteItem}
 			/>

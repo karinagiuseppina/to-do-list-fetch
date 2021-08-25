@@ -10,22 +10,24 @@ const Container = () => {
 
 	const handleAddItem = newItem => {
 		const duplicatedElement = list.findIndex(
-			item =>
-				item.inputValue.toLowerCase() ===
-				newItem.inputValue.toLowerCase()
+			item => item.label.toLowerCase() === newItem.label.toLowerCase()
 		);
 
 		if (duplicatedElement === -1) {
-			setList([...list, newItem]);
+			let newList = list;
+			newList.push(newItem);
+			setList(newList);
+			uploadTasks();
 		} else {
 			alert("¡Lo sentimos! La tarea ya está añadida");
 		}
 	};
 
 	const handleDeleteItem = pos => {
-		const temp = [...list];
+		const temp = list;
 		temp.splice(pos, 1);
 		setList(temp);
+		uploadTasks();
 	};
 
 	function createNewUser(user) {
@@ -48,15 +50,33 @@ const Container = () => {
 				if (!response.ok) {
 					throw Error(response.statusText);
 				}
-				// Read the response as json.
 				return response.json();
 			})
 			.then(function(responseAsJson) {
-				// Do stuff with the JSON
-				console.log(responseAsJson);
+				setList(responseAsJson);
 			})
 			.catch(function(error) {
-				console.log("Looks like there was a problem: \n", error);
+				alert("Looks like there was a problem: \n", error);
+			});
+	}
+	async function uploadTasks() {
+		fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/karinagiuseppina",
+			{
+				method: "PUT",
+				body: JSON.stringify(list),
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}
+		)
+			.then(function(response) {
+				if (!response.ok) {
+					throw Error(response.statusText);
+				}
+			})
+			.catch(function(error) {
+				alert("Looks like there was a problem up: \n", error);
 			});
 	}
 
