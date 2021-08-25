@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import DisplayLiTask from "./displayLiTask.jsx";
 import ItemsLeft from "./itemsLeft.jsx";
 
-const TaskList = ({ list, handleDeleteItem }) => {
+const TaskList = ({ list, handleDeleteItem, handleEditItem }) => {
 	let taskinHTML = (
 		<li className="list-group-item gray-color">No tasks, add a task.</li>
 	);
@@ -15,6 +15,7 @@ const TaskList = ({ list, handleDeleteItem }) => {
 				task={task.label}
 				position={index}
 				handleDeleteItem={handleDeleteItem}
+				handleEditItem={handleEditItem}
 			/>
 		));
 	}
@@ -33,7 +34,8 @@ const TaskList = ({ list, handleDeleteItem }) => {
 
 TaskList.propTypes = {
 	list: PropTypes.array,
-	handleDeleteItem: PropTypes.func
+	handleDeleteItem: PropTypes.func,
+	handleEditItem: PropTypes.func
 };
 
 export default TaskList;

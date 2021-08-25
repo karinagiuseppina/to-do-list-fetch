@@ -1,9 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const displayLiTask = ({ task, position, handleDeleteItem }) => {
+const displayLiTask = ({
+	task,
+	position,
+	handleDeleteItem,
+	handleEditItem
+}) => {
 	const deleteTask = () => {
 		handleDeleteItem(position);
+	};
+
+	const editTask = () => {
+		handleEditItem(task, position);
 	};
 
 	return (
@@ -11,7 +20,8 @@ const displayLiTask = ({ task, position, handleDeleteItem }) => {
 			key={position}
 			className="list-group-item d-flex justify-content-between gray-color">
 			<span>{task}</span>
-			<i onClick={deleteTask}>x</i>
+			<i onClick={editTask}>Editar</i>
+			<i onClick={deleteTask}>Borrar</i>
 		</li>
 	);
 };
@@ -19,7 +29,8 @@ const displayLiTask = ({ task, position, handleDeleteItem }) => {
 displayLiTask.propTypes = {
 	task: PropTypes.string,
 	position: PropTypes.number,
-	handleDeleteItem: PropTypes.func
+	handleDeleteItem: PropTypes.func,
+	handleEditItem: PropTypes.func
 };
 
 export default displayLiTask;

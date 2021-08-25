@@ -35,13 +35,3 @@ inputNewItem.propTypes = {
 };
 
 export default inputNewItem;
-
-// React.useEffect(() => {
-// 	window.addEventListener("keydown", event => {
-// 		if (event.key === "Enter") {
-// 			setInputValue(event.target.value);
-// 			validateInput();
-// 			console.log(event);
-// 		}
-// 	});
-// }, []);
