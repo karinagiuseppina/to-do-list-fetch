@@ -19,7 +19,7 @@ const displayLiTask = ({
 		<li
 			key={position}
 			className="list-group-item d-flex justify-content-between gray-color">
-			<span>{task}</span>
+			<span className="flex-grow-1">{task}</span>
 			<i onClick={editTask}>Editar</i>
 			<i onClick={deleteTask}>Borrar</i>
 		</li>

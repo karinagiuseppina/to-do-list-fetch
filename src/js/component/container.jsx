@@ -9,9 +9,8 @@ const Container = () => {
 	const [list, setList] = useState([]);
 	const [inputValue, setInputValue] = React.useState("");
 	const [labelPosition, setlabelPosition] = React.useState(-1);
-	const [existUser, setExistUser] = React.useState(true);
 
-	const handleAddItem = newItem => {
+	const handleItem = newItem => {
 		const duplicatedElement = list.findIndex(
 			item => item.label.toLowerCase() === newItem.label.toLowerCase()
 		);
@@ -20,8 +19,9 @@ const Container = () => {
 			if (labelPosition === -1) {
 				setList([...list, newItem]);
 			} else {
-				let newList = list;
+				let newList = [...list];
 				newList.splice(labelPosition, 1, newItem);
+				setlabelPosition(-1);
 				setList(newList);
 			}
 		} else {
@@ -39,8 +39,8 @@ const Container = () => {
 		setInputValue(task);
 	};
 
-	const handleDeleteAllItems = () => {
-		fetch(
+	async function handleDeleteAllItems() {
+		await fetch(
 			"https://assets.breatheco.de/apis/fake/todos/user/karinagiuseppina",
 			{
 				method: "DELETE",
@@ -49,9 +49,9 @@ const Container = () => {
 				}
 			}
 		);
-		setExistUser(false);
-	};
-
+		await createNewUser("karinagiuseppina");
+		setList([]);
+	}
 	function createNewUser(user) {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/" + user, {
 			method: "POST",
@@ -67,27 +67,30 @@ const Container = () => {
 	async function loadTasks() {
 		fetch(
 			"https://assets.breatheco.de/apis/fake/todos/user/karinagiuseppina"
-		).then(function(response) {
-			if (response.ok) {
-				setList(response.json());
-			}
-		});
+		)
+			.then(resp => {
+				return resp.json();
+			})
+			.then(data => {
+				setList(data);
+			});
 	}
 	async function uploadTasks(newList) {
-		fetch(
-			"https://assets.breatheco.de/apis/fake/todos/user/karinagiuseppina",
-			{
-				method: "PUT",
-				body: JSON.stringify(newList),
-				headers: {
-					"Content-Type": "application/json"
+		if (newList.length !== 0) {
+			fetch(
+				"https://assets.breatheco.de/apis/fake/todos/user/karinagiuseppina",
+				{
+					method: "PUT",
+					body: JSON.stringify(newList),
+					headers: {
+						"Content-Type": "application/json"
+					}
 				}
-			}
-		);
+			);
+		}
 	}
 
 	useEffect(() => {
-		createNewUser("karinagiuseppina");
 		loadTasks();
 	}, []);
 
@@ -99,7 +102,7 @@ const Container = () => {
 		<div className="container-fluid">
 			<TitleHeader title="To do's" />
 			<InputNewItem
-				handleAddItem={handleAddItem}
+				handleItem={handleItem}
 				inputValue={inputValue}
 				setInputValue={setInputValue}
 			/>

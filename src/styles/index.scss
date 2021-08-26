@@ -14,10 +14,17 @@
 body {
     background: #f1eeee;
 }
-li i{
+li i {
     opacity: 0;
     font-style: normal;
-    color: #9e7a7e;
+    color: white;
+    transition: .5s;
+    background: #9e7a7e;
+    border-radius: 10%;
+    padding: 5px;
+    font-size: 10px;
+    margin: 0 5px;
+    cursor: pointer;
 }
 
 li:hover i{
