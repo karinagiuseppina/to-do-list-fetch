@@ -50,18 +50,29 @@ const Container = () => {
 			}
 		);
 		await createNewUser("karinagiuseppina");
-		setList([]);
+		loadTasks();
 	}
-	function createNewUser(user) {
-		fetch("https://assets.breatheco.de/apis/fake/todos/user/" + user, {
-			method: "POST",
-			mode: "cors",
-			redirect: "follow",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify([])
-		});
+	async function createNewUser(user) {
+		return fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/" + user,
+			{
+				method: "POST",
+				mode: "cors",
+				redirect: "follow",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify([])
+			}
+		)
+			.then(function(response) {
+				if (!response.ok) {
+					throw Error(response.statusText);
+				}
+			})
+			.catch(function(error) {
+				alert("¡Ups! No podemos añadir a ese usuario \n", error);
+			});
 	}
 
 	async function loadTasks() {
@@ -86,7 +97,18 @@ const Container = () => {
 						"Content-Type": "application/json"
 					}
 				}
-			);
+			)
+				.then(function(response) {
+					if (!response.ok) {
+						throw Error(response.statusText);
+					}
+				})
+				.catch(function(error) {
+					alert(
+						"¡Ups! No hemos podido actualizar los cambios \n",
+						error
+					);
+				});
 		}
 	}
 
