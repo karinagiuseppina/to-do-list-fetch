@@ -17,7 +17,7 @@ const inputNewItem = ({ inputValue, setInputValue, handleItem }) => {
 		<div className="row">
 			<div className="col-6 mx-auto my-1 d-flex justify-content-stretch">
 				<input
-					className="flex-grow-1 p-2 border border-white border-2"
+					className="flex-grow-1 p-2 border border-gray gray-color"
 					type="text"
 					onChange={e => setInputValue(e.target.value)}
 					onKeyDown={addTask}
